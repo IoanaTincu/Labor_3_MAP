@@ -2,6 +2,8 @@ package repository;
 
 import exceptions.NullValueException;
 
+import java.util.List;
+
 /**
  * CRUD operations repository interface
  * @param <T> generic class
@@ -19,7 +21,7 @@ public interface ICrudRepository<T> {
      *
      * @return all entities
      */
-    Iterable<T> findAll();
+    List<T> findAll();
 
     /**
      *
@@ -41,4 +43,10 @@ public interface ICrudRepository<T> {
      * @return null - if the entity is updated, otherwise returns the entity - (e.g id does not exist).
      */
     T update(T entity) throws NullValueException;
+
+    /**
+     *
+     * @return the number of elements from the repoList
+     */
+    int size();
 }

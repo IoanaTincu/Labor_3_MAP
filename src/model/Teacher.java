@@ -6,8 +6,8 @@ public class Teacher extends Person {
 
     private List<Course> courses;
 
-    public Teacher(String firstName, String lastName, List<Course> courses) {
-        super(firstName, lastName);
+    public Teacher(long id, String firstName, String lastName, List<Course> courses) {
+        super(id, firstName, lastName);
         this.courses = courses;
     }
 

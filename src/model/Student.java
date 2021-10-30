@@ -4,23 +4,13 @@ import java.util.List;
 
 public class Student extends Person {
 
-    private long studentId;
     private int totalCredits;
     private List<Course> enrolledCourses;
 
-    public Student(String firstName, String lastName, long studentId, int totalCredits, List<Course> enrolledCourses) {
-        super(firstName, lastName);
-        this.studentId = studentId;
+    public Student(long id, String firstName, String lastName, int totalCredits, List<Course> enrolledCourses) {
+        super(id, firstName, lastName);
         this.totalCredits = totalCredits;
         this.enrolledCourses = enrolledCourses;
-    }
-
-    public long getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(long studentId) {
-        this.studentId = studentId;
     }
 
     public int getTotalCredits() {
@@ -42,9 +32,9 @@ public class Student extends Person {
     @Override
     public String toString() {
         return "Student{" +
-                "firstName='" + firstName + '\'' +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", studentId=" + studentId +
                 ", totalCredits=" + totalCredits +
                 ", enrolledCourses=" + enrolledCourses +
                 '}';

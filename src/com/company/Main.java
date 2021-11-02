@@ -2,9 +2,11 @@ package com.company;
 
 import exceptions.NullValueException;
 import model.Course;
+import model.Person;
 import model.Student;
 import model.Teacher;
 import repository.CourseRepository;
+import repository.PersonRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +26,7 @@ public class Main {
 
         teacher1.getCourses().add(course1);
 
-        System.out.println(course1);
+        /*System.out.println(course1);
         System.out.println(teacher1);
         System.out.println(student1);
 
@@ -68,6 +70,19 @@ public class Main {
 
         System.out.println("RepoList: ");
         for(Course course : courseRepo.findAll())
-            System.out.println("RepoList: " + course);
+            System.out.println("RepoList: " + course);*/
+
+
+        PersonRepository<Student> studentRepo = new PersonRepository<Student>();
+        try {
+            studentRepo.save(student1);
+        }
+        catch(NullValueException e) {
+            System.out.println(e);
+        }
+
+        System.out.println(studentRepo.size());
+        for(Person student : studentRepo.findAll())
+            System.out.println(student);
     }
 }

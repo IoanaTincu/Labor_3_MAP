@@ -22,6 +22,8 @@ public class Main {
         Course course1 = new Course(10302021,"Analiza matematica",teacher1,42,listStudents1,5);
         Course course2 = new Course(10302021,"Algoritmi fundamentali",teacher2,30,listStudents1,5);
 
+        teacher1.getCourses().add(course1);
+
         System.out.println(course1);
         System.out.println(teacher1);
         System.out.println(student1);

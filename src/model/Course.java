@@ -73,7 +73,7 @@ public class Course {
         return "Course{" +
                 "name='" + name + '\'' +
                 ", courseId=" + id +
-                ", teacher=" + teacher +
+                ", teacher=" + '\'' + teacher.getFirstName() + " " + teacher.getLastName() + '\'' +
                 ", maxEnrollment=" + maxEnrollment +
                 ", studentsEnrolled=" + studentsEnrolled +
                 ", credits=" + credits +

@@ -3,6 +3,9 @@ package repository;
 import exceptions.NullValueException;
 import model.Course;
 
+/**
+ * We cannot implement the CRUD methods in generic class InMemoryRepository because getId() isn't recognized (because of class T)
+ */
 public class CourseRepository extends InMemoryRepository<Course> {
 
     public CourseRepository() {
@@ -11,10 +14,10 @@ public class CourseRepository extends InMemoryRepository<Course> {
 
     @Override
     public Course findOne(Long id) throws NullValueException {
-        if(id==null)
+        if (id == null)
             throw new NullValueException("Invalid ID");
-        for(Course course : repoList) {
-            if(course.getId() == id)
+        for (Course course : repoList) {
+            if (course.getId() == id)
                 return course;
         }
         return null;
@@ -22,10 +25,10 @@ public class CourseRepository extends InMemoryRepository<Course> {
 
     @Override
     public Course save(Course entity) throws NullValueException {
-        if(entity == null)
+        if (entity == null)
             throw new NullValueException("Invalid entity");
-        for(Course course : repoList)
-            if(course.getId() == entity.getId())
+        for (Course course : repoList)
+            if (course.getId() == entity.getId())
                 return entity;
         repoList.add(entity);
         return null;
@@ -33,10 +36,10 @@ public class CourseRepository extends InMemoryRepository<Course> {
 
     @Override
     public Course delete(Long id) throws NullValueException {
-        if(id == null)
+        if (id == null)
             throw new NullValueException("Invalid entity");
-        for(Course course : repoList)
-            if(course.getId() == id) {
+        for (Course course : repoList)
+            if (course.getId() == id) {
                 repoList.remove(course);
                 return course;
             }
@@ -45,10 +48,10 @@ public class CourseRepository extends InMemoryRepository<Course> {
 
     @Override
     public Course update(Course entity) throws NullValueException {
-        if(entity == null)
+        if (entity == null)
             throw new NullValueException("Invalid entity");
-        for(Course course : repoList)
-            if(course.getId() == entity.getId()) {
+        for (Course course : repoList)
+            if (course.getId() == entity.getId()) {
                 repoList.remove(course);
                 repoList.add(entity);
                 return null;

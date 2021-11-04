@@ -53,7 +53,9 @@ public interface ICrudRepository<T> {
     T update(T entity) throws NullValueException;
 
     /**
-     * @return the number of elements from the repoList
+     * counts the elements from the repoList
+     *
+     * @return the number of elements
      */
     int size();
 }

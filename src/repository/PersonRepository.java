@@ -5,8 +5,9 @@ import model.Course;
 import model.Person;
 
 /**
- * @param <T> generic PersonRepository. StudentRepository and TeacherRepository have the same methods.
- *           That's why we create a generic PersonRepository
+ * Repository Class that manages all CRUD operations for a Person Entity
+ *
+ * @param <T> generic PersonRepository
  */
 public class PersonRepository<T extends Person> extends InMemoryRepository<T> {
 

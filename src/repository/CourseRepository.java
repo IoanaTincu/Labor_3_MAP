@@ -4,8 +4,7 @@ import exceptions.NullValueException;
 import model.Course;
 
 /**
- * We cannot implement the CRUD methods in generic class InMemoryRepository because getId() isn't recognized (because of class T).
- * That's why we implement them in different repositories for objects that have the method getId() implemented
+ * Repository Class that manages all CRUD operations for a Course Entity
  */
 public class CourseRepository extends InMemoryRepository<Course> {
 

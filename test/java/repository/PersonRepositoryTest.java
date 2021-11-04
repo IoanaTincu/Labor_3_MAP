@@ -1,5 +1,6 @@
 package repository;
 
+import com.sun.org.glassfish.gmbal.Description;
 import exceptions.NullValueException;
 import model.Course;
 import model.Student;
@@ -21,105 +22,84 @@ class PersonRepositoryTest {
     Student student2 = new Student(113, "Luca", "Tompea", 28, enrolledCourses1);
 
     @BeforeEach
-    public void setUp() {
-        try {
-            studentRepo.save(student1);
-        } catch (NullValueException e) {
-        }
+    public void setUp() throws NullValueException {
+        studentRepo.save(student1);
     }
 
     @Test
-    void findOne() {
-        try {
-            assertEquals(studentRepo.findOne(student1.getId()), student1);
-        } catch (NullValueException e) {
-        }
-
-        try {
-            assertEquals(studentRepo.findOne(student2.getId()), null);
-        } catch (NullValueException e) {
-        }
-
-        try {
-            studentRepo.findOne(null);
-            assert (false);
-        } catch (NullValueException e) {
-        }
-
+    @Description("Should return the parameter object because the student has been found")
+    void findOne_student_found() throws NullValueException {
+        assertEquals(studentRepo.findOne(student1.getId()), student1);
     }
 
     @Test
-    void save() {
-        try {
-            assertEquals(studentRepo.save(student2), null);
-        } catch (NullValueException e) {
-        }
+    @Description("Should return null because there is no student with the same id in the repository")
+    void findOne_student_not_found() throws NullValueException {
+        assertNull(studentRepo.findOne(student2.getId()));
+    }
 
+    @Test
+    @Description("Should throw a NullValueException because the student is null")
+    void findOne_student_null() {
+        assertThrows(NullValueException.class, () -> studentRepo.findOne(null));
+    }
+
+    @Test
+    @Description("Should return null because the parameter object has been saved")
+    void save_student_not_found() throws NullValueException {
+        assertNull(studentRepo.save(student2));
         assertEquals(studentRepo.size(), 2);
-        try {
-            assertEquals(studentRepo.findOne(student2.getId()), student2);
-        } catch (NullValueException e) {
-        }
-
-        try {
-            assertEquals(studentRepo.save(student2), student2);
-        } catch (NullValueException e) {
-        }
-
-        try {
-            studentRepo.save(null);
-            assert (false);
-        } catch (NullValueException e) {
-        }
-
+        assertEquals(studentRepo.findOne(student2.getId()), student2);
     }
 
     @Test
-    void delete() {
-        try {
-            studentRepo.delete(null);
-            assert (false);
-        } catch (NullValueException e) {
-        }
+    @Description("Should return the parameter object because the student already exists in the repository")
+    void save_student_found() throws NullValueException {
+        assertEquals(studentRepo.save(student1), student1);
+    }
 
-        try {
-            assertEquals(studentRepo.delete(student2.getId()), null);
-        } catch (NullValueException e) {
-        }
+    @Test
+    @Description("Should throw a NullValueException because the student is null")
+    void save_course_null() {
+        assertThrows(NullValueException.class, () -> studentRepo.save(null));
+    }
 
-        try {
-            assertEquals(studentRepo.delete(student1.getId()), student1);
-        } catch (NullValueException e) {
-        }
-
+    @Test
+    @Description("Should return the parameter object because the student has been deleted")
+    void delete_student_found() throws NullValueException {
+        assertEquals(studentRepo.delete(student1.getId()), student1);
         assertEquals(studentRepo.size(), 0);
-
     }
 
     @Test
-    void update() {
+    @Description("Should return null because there is no student with the same id in the repository")
+    void delete_student_not_found() throws NullValueException {
+        assertEquals(studentRepo.delete(student2.getId()), null);
+    }
+
+    @Test
+    @Description("Should throw a NullValueException because the student is null")
+    void delete_student_null() {
+        assertThrows(NullValueException.class, () -> studentRepo.delete(null));
+    }
+
+    @Test
+    @Description("Should return null because the student has been updated")
+    void update_student_found() throws NullValueException {
         Student newStudent1 = new Student(410, "Stefan", "Blaga", 17, enrolledCourses1);
+        assertNull(studentRepo.update(newStudent1));
+        assertEquals(studentRepo.findOne(newStudent1.getId()), newStudent1);
+    }
 
-        try {
-            assertEquals(studentRepo.update(newStudent1), null);
-        } catch (NullValueException e) {
-        }
+    @Test
+    @Description("Should return the parameter object because there is no student with the same id in the repository")
+    void update_student_not_found() throws NullValueException {
+        assertEquals(studentRepo.update(student2), student2);
+    }
 
-        try {
-            assertEquals(studentRepo.findOne(newStudent1.getId()), newStudent1);
-        } catch (NullValueException e) {
-        }
-
-        try {
-            assertEquals(studentRepo.update(student2), student2);
-        } catch (NullValueException e) {
-        }
-
-        try {
-            studentRepo.update(null);
-            assert (false);
-        } catch (NullValueException e) {
-        }
-
+    @Test
+    @Description("Should throw a NullValueException because the student is null")
+    void update_course_null() {
+        assertThrows(NullValueException.class, () -> studentRepo.update(null));
     }
 }

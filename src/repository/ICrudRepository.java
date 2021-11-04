@@ -12,8 +12,11 @@ import java.util.List;
 public interface ICrudRepository<T> {
 
     /**
-     * @param id -the id of the entity to be returned id must not be null
-     * @return the entity with the specified id or null - if there is no entity with the given id
+     * Searches for the entity with the specified id.
+     * Returns the entity with the specified id or null - if there is no entity with the given id. id must not be null
+     *
+     * @param id -the id of the entity to be searched for
+     * @return the entity with the specified id or null
      */
     T findOne(Long id) throws NullValueException;
 
@@ -23,22 +26,29 @@ public interface ICrudRepository<T> {
     List<T> findAll();
 
     /**
-     * @param entity entity must be not null
-     * @return null- if the given entity is saved otherwise returns the entity (id already exists)
+     * Adds an entity to the repository.
+     * Returns null- if the given entity is saved otherwise returns the entity (id already exists). entity must be not null
+     *
+     * @param entity to be saved
+     * @return null or the already existing entity
      */
     T save(T entity) throws NullValueException;
 
     /**
-     * removes the entity with the specified id
+     * removes the entity with the specified id.
+     * Returns the removed entity or null if there is no entity with the given id. id must be not null
      *
-     * @param id id must be not null
-     * @return the removed entity or null if there is no entity with the given id
+     * @param id -the id of the entity to be removed
+     * @return the removed entity or null
      */
     T delete(Long id) throws NullValueException;
 
     /**
-     * @param entity entity must not be null
-     * @return null - if the entity is updated, otherwise returns the entity - (e.g id does not exist).
+     * Updates the entity in the repository with the entity got as parameter.
+     * Returns null - if the entity is updated, otherwise returns the entity - (e.g id does not exist). entity must not be null
+     *
+     * @param entity to be updated with
+     * @return null or the not existing entity
      */
     T update(T entity) throws NullValueException;
 

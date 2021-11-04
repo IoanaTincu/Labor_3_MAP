@@ -1,6 +1,7 @@
 package model;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Student extends Person {
 
@@ -38,5 +39,19 @@ public class Student extends Person {
                 ", totalCredits=" + totalCredits +
                 ", enrolledCourses=" + enrolledCourses +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Student student = (Student) o;
+        return totalCredits == student.totalCredits && Objects.equals(enrolledCourses, student.enrolledCourses);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), totalCredits, enrolledCourses);
     }
 }

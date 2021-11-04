@@ -1,6 +1,7 @@
 package model;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Course {
 
@@ -78,5 +79,18 @@ public class Course {
                 ", studentsEnrolled=" + studentsEnrolled +
                 ", credits=" + credits +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Course course = (Course) o;
+        return id == course.id && maxEnrollment == course.maxEnrollment && credits == course.credits && Objects.equals(name, course.name) && Objects.equals(teacher, course.teacher) && Objects.equals(studentsEnrolled, course.studentsEnrolled);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, teacher, maxEnrollment, studentsEnrolled, credits);
     }
 }

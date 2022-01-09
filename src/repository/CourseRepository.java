@@ -52,8 +52,11 @@ public class CourseRepository extends InMemoryRepository<Course> {
             throw new NullValueException("Invalid entity");
         for (Course course : repoList)
             if (course.getId() == entity.getId()) {
-                repoList.remove(course);
-                repoList.add(entity);
+                course.setName(entity.getName());
+                course.setTeacher(entity.getTeacher());
+                course.setMaxEnrollment(entity.getMaxEnrollment());
+                course.setStudentsEnrolled(entity.getStudentsEnrolled());
+                course.setCredits(entity.getCredits());
                 return null;
             }
         return entity;
